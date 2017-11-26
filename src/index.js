@@ -1,34 +1,13 @@
-import './index.css';
-
-import { getUsers, deleteUser } from './api/userApi';
-
-// Populate table of users via API call.
-getUsers().then(result => {
-    let usersBody = "";
-
-    result.forEach(user => {
-        usersBody += `<tr>
-      <td><a href="#" data-id="${user.id}" class="deleteUser">Delete</a></td>
-      <td>${user.id}</td>
-      <td>${user.firstName}</td>
-      <td>${user.lastName}</td>
-      <td>${user.email}</td>
-      </tr>`
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+require("./index.css");
+var userApi_1 = require("./api/userApi");
+userApi_1.getUsers().then(function (result) {
+    var usersBody = "";
+    result.forEach(function (user) {
+        usersBody += "<tr>\n      <td><a href=\"#\" data-id=\"" + user.id + "\" class=\"deleteUser\">Delete</a></td>\n      <td>" + user.id + "</td>\n      <td>" + user.firstName + "</td>\n      <td>" + user.lastName + "</td>\n      <td>" + user.email + "</td>\n      </tr>";
     });
-
-    global.document.getElementById('users').innerHTML = usersBody;
-
-    const deleteLinks = global.document.getElementsByClassName('deleteUser');
-
-    // Must use array.from to create a real array from a DOM collection
-    // getElementsByClassname only returns an "array like" object
-    Array.from(deleteLinks, link => {
-        link.onclick = function (event) {
-            const element = event.target;
-            event.preventDefault();
-            deleteUser(element.attributes["data-id"].value);
-            const row = element.parentNode.parentNode;
-            row.parentNode.removeChild(row);
-        };
-    });
+    document.getElementById('users').innerHTML = usersBody;
+    var deleteLinks = document.getElementsByClassName('deleteUser');
 });
+//# sourceMappingURL=index.js.map

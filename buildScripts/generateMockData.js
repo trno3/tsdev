@@ -1,22 +1,16 @@
-/* This script generates mock data for local development.
-   This way you don't have to point to an actual API,
-   but you can enjoy realistic, but randomized data,
-   and rapid page loads due to local, static data.
- */
-
-/* eslint-disable no-console */
-
-import jsf from 'json-schema-faker';
-import { schema } from './mockDataSchema';
-import fs from 'fs';
-import chalk from 'chalk';
-
-const json = JSON.stringify(jsf(schema));
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var jsf = require("json-schema-faker/ts");
+var mockDataSchema_1 = require("./mockDataSchema");
+var fs = require("fs");
+var chalk = require("chalk");
+var json = JSON.stringify(jsf.format(mockDataSchema_1.schema));
 fs.writeFile("./src/api/db.json", json, function (err) {
     if (err) {
-        return console.log(chalk.red(err));
-    } else {
+        return console.log(chalk.red(err.message));
+    }
+    else {
         console.log(chalk.green("Mock data generated."));
     }
 });
+//# sourceMappingURL=generateMockData.js.map

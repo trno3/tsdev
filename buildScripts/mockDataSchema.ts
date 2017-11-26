@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.schema = {
+export const schema = {
     "type": "object",
     "properties": {
         "users": {
@@ -33,5 +31,4 @@ exports.schema = {
         }
     },
     "required": ["users"]
-};
-//# sourceMappingURL=mockDataSchema.js.map
+}; 

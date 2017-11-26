@@ -1,32 +1,29 @@
-import 'whatwg-fetch';
-import getBaseUrl from './baseUrl';
-
-const baseUrl = getBaseUrl();
-
-export function getUsers() {
-  return get('users');
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+require("whatwg-fetch");
+var baseUrl_1 = require("./baseUrl");
+var baseUrl = baseUrl_1.default();
+function getUsers() {
+    return get('users');
 }
-
-export function deleteUser(id) {
-  return del(`users/${id}`);
+exports.getUsers = getUsers;
+function deleteUser(id) {
+    return del("users/" + id);
 }
-
+exports.deleteUser = deleteUser;
 function get(url) {
-  return fetch(baseUrl + url).then(onSuccess, onError);
+    return fetch(baseUrl + url).then(onSuccess, onError);
 }
-
 function del(url) {
-  const request = new Request(baseUrl + url, {
-    method: 'DELETE'
-  });
-
-  return fetch(request).then(onSuccess, onError);
+    var request = new Request(baseUrl + url, {
+        method: 'DELETE'
+    });
+    return fetch(request).then(onSuccess, onError);
 }
-
 function onSuccess(response) {
-  return response.json();
+    return response.json();
 }
-
 function onError(error) {
-  console.log(error); // eslint-disable-line no-console
-} 
+    console.log(error);
+}
+//# sourceMappingURL=userApi.js.map
