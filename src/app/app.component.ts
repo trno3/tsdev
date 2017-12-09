@@ -2,9 +2,12 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
    selector: 'app',
-   template: '<div>loading jorepeich...{{pepe}}</div>'
+   template: '<div>loading jorepeich...{{text}}</div>'
 })
 export class AppComponent {
+   text: string;
 
-   text: string = 'pepe';
+   constructor() {
+      this.text = 'pepe';
+   }
 }
