@@ -1,13 +1,16 @@
 var path = require('path');
 var HtmlWebpackPlugin = require("html-webpack-plugin");
-var webpack =  require("webpack");
+var webpack = require("webpack");
 
 var config = {
    devtool: 'inline-source-map',
-   entry: './src/main.ts',
+   entry: {
+      vendor: './src/vendor.ts',
+      app: './src/main.ts'
+   },
    target: 'web',
    output: {
-      filename: 'bundle.js',
+      filename: '[name].js',
       path: path.resolve(__dirname, 'dist')
    },
    resolve: {
@@ -19,7 +22,10 @@ var config = {
          inject: true,
          debug: true
       }),
-     new webpack.ContextReplacementPlugin(/\@angular(\\|\/)core(\\|\/)esm5/, path.join(__dirname, './client'))
+      new webpack.optimize.CommonsChunkPlugin({
+         name: "vendor"
+      }),
+      new webpack.ContextReplacementPlugin(/\@angular(\\|\/)core(\\|\/)esm5/, path.join(__dirname, './client'))
    ],
    module: {
       rules: [
@@ -27,6 +33,17 @@ var config = {
             test: /\.ts$/,
             loader: 'ts-loader',
             exclude: [/test/, /node_modules/]
+         },
+         {
+            test: /\.css$/,
+            use: [
+               {
+                  loader: 'style-loader'
+               },
+               {
+                  loader: 'style-loader!css-loader',
+               }
+            ]
          }
       ]
    }
